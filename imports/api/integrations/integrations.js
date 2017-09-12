@@ -6,7 +6,13 @@ import { Factory } from 'meteor/dburles:factory';
 import { Brands } from '/imports/api/brands/brands';
 import { Channels } from '/imports/api/channels/channels';
 import { facebookSchema, twitterSchema } from './social/social';
-import { KIND_CHOICES, FORM_LOAD_TYPES, FORM_SUCCESS_ACTIONS } from './constants';
+import {
+  KIND_CHOICES,
+  FORM_LOAD_TYPES,
+  FORM_SUCCESS_ACTIONS,
+  LIVE_ROOM_LOAD_TYPES,
+  LIVE_ROOM_STATUS_CHOICES,
+} from './constants';
 
 class IntegrationCollections extends Mongo.Collection {}
 
@@ -130,6 +136,18 @@ export const messengerSchema = new SimpleSchema({
   thankYouMessage: {
     type: String,
     optional: true,
+  },
+});
+
+export const LiveRoom = new SimpleSchema({
+  loadType: {
+    type: String,
+    allowedValues: FORM_LOAD_TYPES.ALL_LIST,
+    optional: true,
+  },
+  status: {
+    type: String,
+    allowedValues: FORM_LOAD_TYPES.ALL_LIST,
   },
 });
 
