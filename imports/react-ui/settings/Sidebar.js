@@ -75,6 +75,11 @@ function Sidebar() {
               <i className="icon ion-arrow-right-b" />Facebook
             </a>
           </li>
+          <li>
+            <a href={'/settings/integrations?kind=live_call'}>
+              <i className="icon ion-arrow-right-b" />Live call
+            </a>
+          </li>
         </ul>
       </Wrapper.Sidebar.Section>
       <Wrapper.Sidebar.Section>

@@ -139,15 +139,23 @@ export const messengerSchema = new SimpleSchema({
   },
 });
 
-export const LiveRoom = new SimpleSchema({
+export const liveRoomSchema = new SimpleSchema({
   loadType: {
     type: String,
-    allowedValues: FORM_LOAD_TYPES.ALL_LIST,
+    allowedValues: LIVE_ROOM_LOAD_TYPES.ALL_LIST,
     optional: true,
   },
   status: {
     type: String,
-    allowedValues: FORM_LOAD_TYPES.ALL_LIST,
+    allowedValues: LIVE_ROOM_STATUS_CHOICES.ALL_LIST,
+  },
+  participantOne: {
+    type: String,
+    optional: true,
+  },
+  participantTwo: {
+    type: String,
+    optional: true,
   },
 });
 
@@ -190,6 +198,11 @@ Integrations.schema = new SimpleSchema({
   // facebook authentication info
   facebookData: {
     type: facebookSchema,
+    optional: true,
+  },
+
+  liveCallData: {
+    type: liveRoomSchema,
     optional: true,
   },
 

@@ -3,12 +3,27 @@ import { mount } from 'react-mounter';
 import { MainLayout } from '/imports/react-ui/layout/containers';
 import settingsRoute from '../routes';
 
-import { List, Messenger, Twitter, MessengerAppearance, MessengerConfigs } from './containers';
+import {
+  List,
+  Messenger,
+  Twitter,
+  MessengerAppearance,
+  MessengerConfigs,
+  LiveCall,
+} from './containers';
 
 import { AddIntegration } from './components';
 
 const integrations = settingsRoute.group({
   prefix: '/integrations',
+});
+
+integrations.route('/live-call', {
+  name: 'settings/integrations/live-call',
+
+  action() {
+    mount(MainLayout, { content: <LiveCall /> });
+  },
 });
 
 integrations.route('/messenger', {

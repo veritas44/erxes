@@ -7,6 +7,7 @@ import Form from './Form';
 import Messenger from './Messenger';
 import MessengerAppearance from './MessengerAppearance';
 import MessengerConfigs from './MessengerConfigs';
+import LiveCall from './LiveCall';
 
 export {
   AddIntegration,
@@ -18,4 +19,5 @@ export {
   MessengerAppearance,
   MessengerConfigs,
   Common,
+  LiveCall,
 };

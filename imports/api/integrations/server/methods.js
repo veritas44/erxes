@@ -10,6 +10,35 @@ import { Integrations, messengerSchema, formSchema } from '../integrations';
 import { KIND_CHOICES } from '../constants';
 
 // add messenger
+export const addLiveCall = new ValidatedMethod({
+  name: 'integrations.addLiveCall',
+  mixins: [ErxesMixin],
+
+  validate({ doc }) {
+    check(doc, { name: String, brandId: String });
+  },
+
+  run({ doc }) {
+    return Integrations.insert(Object.assign(doc, { kind: KIND_CHOICES.LIVE_CALL }));
+  },
+});
+
+// edit messenger
+export const editLiveCall = new ValidatedMethod({
+  name: 'integrations.editLiveCall',
+  mixins: [ErxesMixin],
+
+  validate({ _id, doc }) {
+    check(_id, String);
+    check(doc, { name: String, brandId: String });
+  },
+
+  run({ _id, doc }) {
+    return Integrations.update({ _id }, { $set: doc });
+  },
+});
+
+// add messenger
 export const addMessenger = new ValidatedMethod({
   name: 'integrations.addMessenger',
   mixins: [ErxesMixin],

@@ -4,7 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Wrapper } from '/imports/react-ui/layout/components';
 import { ModalTrigger } from '/imports/react-ui/common';
 import Sidebar from '../../Sidebar';
-import { Messenger, Form, Facebook } from '../containers';
+import { Messenger, Form, Facebook, LiveCall } from '../containers';
 
 function AddIntegration() {
   const triggerMessenger = (
@@ -22,6 +22,12 @@ function AddIntegration() {
   const triggerFb = (
     <Button>
       <i className="ion-social-facebook" /> Add facebook page
+    </Button>
+  );
+
+  const triggerLiveCall = (
+    <Button>
+      <i className="ion-social-facebook" /> Add live call
     </Button>
   );
 
@@ -51,6 +57,14 @@ function AddIntegration() {
 
         <ModalTrigger title="Add facebook page" trigger={triggerFb}>
           <Facebook />
+        </ModalTrigger>
+      </div>
+
+      <div className="box">
+        <h2>Live calls</h2>
+
+        <ModalTrigger title="Add live call" trigger={triggerLiveCall}>
+          <LiveCall />
         </ModalTrigger>
       </div>
     </div>

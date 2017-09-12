@@ -5,5 +5,15 @@ import MessengerConfigs from './MessengerConfigs';
 import Form from './Form';
 import Twitter from './Twitter';
 import Facebook from './Facebook';
+import LiveCall from './LiveCall';
 
-export { List, Twitter, Facebook, Messenger, MessengerAppearance, MessengerConfigs, Form };
+export {
+  List,
+  Twitter,
+  Facebook,
+  Messenger,
+  MessengerAppearance,
+  MessengerConfigs,
+  Form,
+  LiveCall,
+};

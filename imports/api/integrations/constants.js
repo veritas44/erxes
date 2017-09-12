@@ -3,7 +3,8 @@ export const KIND_CHOICES = {
   FORM: 'form',
   TWITTER: 'twitter',
   FACEBOOK: 'facebook',
-  ALL_LIST: ['messenger', 'form', 'twitter', 'facebook'],
+  LIVE_CALL: 'live_call',
+  ALL_LIST: ['messenger', 'form', 'twitter', 'facebook', 'live_call'],
 };
 
 export const FORM_LOAD_TYPES = {
@@ -39,4 +40,5 @@ export const LIVE_ROOM_STATUS_CHOICES = {
   OPEN: 'open',
   ACTIVE: 'active',
   INCOMING_CALL: 'incoming_call',
+  ALL_LIST: ['closed', 'open', 'active', 'incoming_call'],
 };

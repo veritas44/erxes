@@ -3,7 +3,7 @@ import { Button, Label } from 'react-bootstrap';
 import Alert from 'meteor/erxes-notifier';
 import { ModalTrigger, Tip, ActionButtons } from '/imports/react-ui/common';
 import { KIND_CHOICES } from '/imports/api/integrations/constants';
-import { Form, Messenger } from '../containers';
+import { Form, Messenger, LiveCall } from '../containers';
 
 const propTypes = {
   integration: PropTypes.object.isRequired,
@@ -80,6 +80,14 @@ class Row extends Component {
       );
     }
 
+    if (kind === KIND_CHOICES.LIVE_CALL) {
+      return (
+        <ModalTrigger title="Edit integration" trigger={editTrigger}>
+          <LiveCall integration={integration} />
+        </ModalTrigger>
+      );
+    }
+
     return null;
   }
 
@@ -97,6 +105,10 @@ class Row extends Component {
 
     if (kind === KIND_CHOICES.FACEBOOK) {
       type = 'facebook';
+    }
+
+    if (kind === KIND_CHOICES.LIVE_CALL) {
+      type = 'live_call';
     }
 
     return type;
