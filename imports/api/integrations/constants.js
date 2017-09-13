@@ -3,8 +3,8 @@ export const KIND_CHOICES = {
   FORM: 'form',
   TWITTER: 'twitter',
   FACEBOOK: 'facebook',
-  LIVE_CALL: 'live_call',
-  ALL_LIST: ['messenger', 'form', 'twitter', 'facebook', 'live_call'],
+  LIVE_CALL: 'live_room',
+  ALL_LIST: ['messenger', 'form', 'twitter', 'facebook', 'live_room'],
 };
 
 export const FORM_LOAD_TYPES = {

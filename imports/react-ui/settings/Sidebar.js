@@ -76,7 +76,7 @@ function Sidebar() {
             </a>
           </li>
           <li>
-            <a href={'/settings/integrations?kind=live_call'}>
+            <a href={'/settings/integrations?kind=live_room'}>
               <i className="icon ion-arrow-right-b" />Live call
             </a>
           </li>
