@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Alert, confirm } from 'modules/common/utils';
 import { Spinner } from 'modules/common/components';
 import { Pipelines } from '../components';
@@ -101,23 +100,23 @@ PipelinesContainer.contextTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.pipelines), {
+  graphql(queries.dealPipelines, {
     name: 'pipelinesQuery',
     options: ({ boardId = '' }) => ({
       variables: { boardId },
       fetchPolicy: 'network-only'
     })
   }),
-  graphql(gql(mutations.pipelineAdd), {
+  graphql(mutations.dealPipelinesAdd, {
     name: 'addPipelineMutation'
   }),
-  graphql(gql(mutations.pipelineEdit), {
+  graphql(mutations.dealPipelinesEdit, {
     name: 'editPipelineMutation'
   }),
-  graphql(gql(mutations.pipelineRemove), {
+  graphql(mutations.dealPipelinesRemove, {
     name: 'removePipelineMutation'
   }),
-  graphql(gql(mutations.pipelinesUpdateOrder), {
+  graphql(mutations.dealPipelinesUpdateOrder, {
     name: 'pipelinesUpdateOrderMutation'
   })
 )(PipelinesContainer);

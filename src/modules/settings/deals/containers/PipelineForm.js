@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Spinner } from 'modules/common/components';
 import { queries } from '../graphql';
 import { PipelineForm } from '../components';
@@ -30,7 +29,7 @@ EditPipelineFormContainer.propTypes = {
 };
 
 const EditPipelineForm = compose(
-  graphql(gql(queries.stages), {
+  graphql(queries.dealStages, {
     name: 'stagesQuery',
     options: ({ pipeline }) => ({
       variables: { pipelineId: pipeline._id || '' },

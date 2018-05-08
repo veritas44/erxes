@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { router as routerUtils } from 'modules/common/utils';
+import { queries } from 'modules/deals/graphql';
 import { Home } from '../components';
-import { queries } from '../graphql';
 
 class HomeContainer extends React.Component {
   componentWillReceiveProps() {
@@ -42,7 +41,7 @@ DefaultBoard.propTypes = {
 };
 
 const DefaultBoardContainer = compose(
-  graphql(gql(queries.boardGetDefault), {
+  graphql(queries.dealBoardGetDefault, {
     name: 'boardGetDefaultQuery'
   })
 )(DefaultBoard);

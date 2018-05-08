@@ -1,0 +1,41 @@
+mutation dealBoardsAdd($name: String!) {
+  dealBoardsAdd(name: $name) {
+    _id
+  }
+}
+
+mutation dealBoardsEdit($_id: String!, $name: String!) {
+  dealBoardsEdit(_id: $_id, name: $name) {
+    _id
+  }
+}
+
+mutation dealBoardsRemove($_id: String!) {
+  dealBoardsRemove(_id: $_id)
+}
+
+mutation dealBoardsSetDefault($_id: String!) {
+  dealBoardsSetDefault(_id: $_id)
+}
+
+mutation dealPipelinesAdd($name: String!, $boardId: String!, $stages: JSON) {
+  dealPipelinesAdd(name: $name, boardId: $boardId, stages: $stages) {
+    _id
+  }
+}
+
+mutation dealPipelinesEdit($_id: String!, $name: String!, $boardId: String!, $stages: JSON) {
+  dealPipelinesEdit(_id: $_id, name: $name, boardId: $boardId, stages: $stages) {
+    _id
+  }
+}
+
+mutation dealPipelinesRemove($_id: String!) {
+  dealPipelinesRemove(_id: $_id)
+}
+
+mutation dealPipelinesUpdateOrder($orders: [OrderItem]) {
+  dealPipelinesUpdateOrder(orders: $orders) {
+    _id
+  }
+}

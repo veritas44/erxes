@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Alert, confirm } from 'modules/common/utils';
-import { queries, mutations } from '../graphql';
+import { dealBoards } from 'modules/deals/graphql/board.graphql';
+import { mutations } from '../graphql';
 import { Boards } from '../components';
 
 class BoardsContainer extends React.Component {
@@ -103,19 +103,19 @@ BoardsContainer.contextTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.boards), {
+  graphql(dealBoards, {
     name: 'boardsQuery'
   }),
-  graphql(gql(mutations.boardAdd), {
+  graphql(mutations.dealBoardsAdd, {
     name: 'addMutation'
   }),
-  graphql(gql(mutations.boardEdit), {
+  graphql(mutations.dealBoardsEdit, {
     name: 'editMutation'
   }),
-  graphql(gql(mutations.boardRemove), {
+  graphql(mutations.dealBoardsRemove, {
     name: 'removeMutation'
   }),
-  graphql(gql(mutations.boardSetDefault), {
+  graphql(mutations.dealBoardsSetDefault, {
     name: 'setDefaultMutation'
   })
 )(BoardsContainer);

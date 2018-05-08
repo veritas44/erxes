@@ -1,0 +1,129 @@
+query dealBoards {
+  dealBoards {
+    _id
+    name
+  }
+}
+
+query dealBoardGetDefault {
+  dealBoardGetDefault {
+    _id
+    name
+  }
+}
+
+query dealBoardDetail($_id: String!) {
+  dealBoardDetail(_id: $_id) {
+    _id
+    name
+  }
+}
+
+query dealPipelines($boardId: String!) {
+  dealPipelines(boardId: $boardId) {
+    _id
+    name
+    boardId
+  }
+}
+
+query dealStages($pipelineId: String!) {
+  dealStages(pipelineId: $pipelineId) {
+    _id
+    name
+    order
+  }
+}
+
+query dealStageDetail($_id: String!) {
+  dealStageDetail(_id: $_id) {
+    _id
+    name
+    pipelineId
+    amount
+  }
+}
+
+query deals($stageId: String, $customerId: String, $companyId: String) {
+  deals(stageId: $stageId, customerId: $customerId, companyId: $companyId) {
+    _id
+  }
+}
+
+query dealDetail($_id: String!) {
+  dealDetail(_id: $_id) {
+    _id
+    name
+    stageId
+    pipeline {
+      _id
+      name
+    }
+    boardId
+    companies {
+      _id
+      name
+      website
+    }
+    customers {
+      _id
+      firstName
+      email
+    }
+    products
+    productsData
+    amount
+    closeDate
+    description
+    assignedUsers {
+      _id
+      email
+      details {
+        fullName
+        avatar
+      }
+    }
+  }
+}
+
+query productDetail($_id: String!) {
+  productDetail(_id: $_id) {
+    _id
+    name
+  }
+}
+
+query users {
+  users {
+    _id
+    username
+    email
+    details {
+      fullName
+      avatar
+    }
+  }
+}
+
+query activityLogsDeal($_id: String!) {
+  activityLogsDeal(_id: $_id) {
+    date {
+      year
+      month
+    }
+    list {
+      id
+      action
+      content
+      createdAt
+      by {
+        _id
+        type
+        details {
+          avatar
+          fullName
+        }
+      }
+    }
+  }
+}

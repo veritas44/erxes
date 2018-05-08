@@ -1,0 +1,16 @@
+query dealPipelines($boardId: String!) {
+  dealPipelines(boardId: $boardId) {
+    _id
+    name
+    boardId
+  }
+}
+
+query dealStages($pipelineId: String!) {
+  dealStages(pipelineId: $pipelineId) {
+    _id
+    name
+    probability
+    pipelineId
+  }
+}

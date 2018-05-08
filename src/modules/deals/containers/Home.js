@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { router as routerUtils } from 'modules/common/utils';
 import { Home } from '../components';
 import { queries } from '../graphql';
@@ -46,16 +45,16 @@ Main.propTypes = {
 };
 
 const MainContainer = compose(
-  graphql(gql(queries.boards), {
+  graphql(queries.dealBoards, {
     name: 'boardsQuery'
   }),
-  graphql(gql(queries.boardGetDefault), {
+  graphql(queries.dealBoardGetDefault, {
     name: 'boardGetDefaultQuery',
     options: ({ queryParams }) => ({
       skip: queryParams.id
     })
   }),
-  graphql(gql(queries.boardDetail), {
+  graphql(queries.dealBoardDetail, {
     name: 'boardDetailQuery',
     options: ({ queryParams }) => ({
       skip: !queryParams.id,
