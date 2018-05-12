@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import queryString from 'query-string';
 import { Alert, router as routerUtils } from 'modules/common/utils';
 import { Inbox as InboxComponent } from '../components';
 import { queries, mutations, subscriptions } from '../graphql';
@@ -17,15 +15,7 @@ class ConversationDetail extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { history } = this.props;
     const { currentUser } = this.context;
-
-    const prevCurrentId = this.props.currentId;
-
-    // add current conversation's _id to url
-    if (!routerUtils.getParam(history, '_id') && prevCurrentId) {
-      routerUtils.setParams(history, { _id: prevCurrentId });
-    }
 
     const { currentId, detailQuery, messagesQuery } = nextProps;
 
@@ -109,6 +99,7 @@ class ConversationDetail extends Component {
 
   render() {
     const {
+      history,
       currentId,
       detailQuery,
       messagesQuery,
@@ -132,12 +123,18 @@ class ConversationDetail extends Component {
       });
     }
 
+    // on change conversation
+    const onChangeConversation = conversation => {
+      routerUtils.setParams(history, { _id: conversation._id });
+    };
+
     const updatedProps = {
       ...this.props,
       currentConversationId: currentId,
       currentConversation,
       conversationMessages,
       loading,
+      onChangeConversation,
       refetch: detailQuery.refetch
     };
 
@@ -188,68 +185,43 @@ ConversationDetail.contextTypes = {
   currentUser: PropTypes.object
 };
 
-/*
- * We will use this component when there is not current conversation id
- * in query string
- */
-const LastConversation = props => {
-  const { lastConversationQuery } = props;
+class WithCurrentId extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const { lastConversationQuery, history, queryParams } = nextProps;
+    const { _id } = queryParams;
 
-  const lastConversation = lastConversationQuery.conversationsGetLast || {};
+    const lastConversation = lastConversationQuery
+      ? lastConversationQuery.conversationsGetLast
+      : {};
 
-  const currentId = lastConversation._id || '';
+    if (!_id && lastConversation) {
+      routerUtils.setParams(history, { _id: lastConversation._id });
+    }
+  }
 
-  const updatedProps = {
-    ...props,
-    currentId
-  };
+  render() {
+    const updatedProps = {
+      ...this.props,
+      currentId: this.props.queryParams._id || ''
+    };
 
-  return <ConversationDetailContainer {...updatedProps} />;
+    return <ConversationDetailContainer {...updatedProps} />;
+  }
+}
+
+WithCurrentId.propTypes = {
+  lastConversationQuery: PropTypes.object,
+  history: PropTypes.object,
+  queryParams: PropTypes.object
 };
 
-LastConversation.propTypes = {
-  lastConversationQuery: PropTypes.object
-};
-
-const LastConversationContainer = compose(
+export default compose(
   graphql(gql(queries.lastConversation), {
     name: 'lastConversationQuery',
     options: ({ queryParams }) => ({
+      skip: queryParams._id,
       variables: generateParams(queryParams),
       fetchPolicy: 'network-only'
     })
   })
-)(LastConversation);
-
-/*
- * Main inbox component
- */
-const Inbox = props => {
-  const queryParams = queryString.parse(props.location.search);
-  const _id = queryParams._id;
-
-  const onChangeConversation = conversation => {
-    routerUtils.setParams(props.history, { _id: conversation._id });
-  };
-
-  const updatedProps = {
-    ...props,
-    queryParams,
-    onChangeConversation
-  };
-
-  if (_id) {
-    updatedProps.currentId = _id;
-
-    return <ConversationDetailContainer {...updatedProps} />;
-  }
-
-  return <LastConversationContainer {...updatedProps} />;
-};
-
-Inbox.propTypes = {
-  history: PropTypes.object,
-  location: PropTypes.object
-};
-
-export default withRouter(Inbox);
+)(WithCurrentId);
