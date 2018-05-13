@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
 import { Alert, confirm } from 'modules/common/utils';
-import { dealBoards } from 'modules/deals/graphql/board.graphql';
+import { queries } from 'modules/deals/graphql';
 import { mutations } from '../graphql';
 import { Boards } from '../components';
 
@@ -103,7 +103,7 @@ BoardsContainer.contextTypes = {
 };
 
 export default compose(
-  graphql(dealBoards, {
+  graphql(queries.dealBoards, {
     name: 'boardsQuery'
   }),
   graphql(mutations.dealBoardsAdd, {

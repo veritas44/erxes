@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { queries, mutations } from '../../graphql';
 import { DealSection } from '../../components';
 import { saveDeal as save, removeDeal as remove } from '../../utils';
@@ -68,16 +67,16 @@ DealSectionContainer.contextTypes = {
 
 export default compose(
   // mutation
-  graphql(gql(mutations.dealsAdd), {
+  graphql(mutations.dealsAdd, {
     name: 'addMutation'
   }),
-  graphql(gql(mutations.dealsEdit), {
+  graphql(mutations.dealsEdit, {
     name: 'editMutation'
   }),
-  graphql(gql(mutations.dealsRemove), {
+  graphql(mutations.dealsRemove, {
     name: 'removeMutation'
   }),
-  graphql(gql(queries.deals), {
+  graphql(queries.deals, {
     name: 'dealsQuery',
     options: ({ customerId, companyId }) => ({
       variables: {

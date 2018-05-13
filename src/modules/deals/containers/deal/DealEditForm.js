@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { DealEditForm } from '../../components';
 import { queries } from '../../graphql';
 
@@ -25,7 +24,7 @@ const propTypes = {
 DealEditFormContainer.propTypes = propTypes;
 
 export default compose(
-  graphql(gql(queries.users), {
+  graphql(queries.users, {
     name: 'usersQuery'
   })
 )(DealEditFormContainer);

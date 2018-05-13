@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Board } from '../components';
 import { queries } from '../graphql';
 
@@ -78,7 +77,7 @@ BoardContainer.childContextTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.pipelines), {
+  graphql(queries.dealPipelines, {
     name: 'pipelinesQuery',
     options: ({ currentBoard }) => ({
       variables: { boardId: currentBoard ? currentBoard._id : '' }

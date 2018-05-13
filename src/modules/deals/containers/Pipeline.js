@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Pipeline } from '../components';
 import { queries, mutations } from '../graphql';
 import { Spinner } from 'modules/common/components';
@@ -78,10 +77,10 @@ PipelineContainer.propTypes = {
 };
 
 const PipelineContainerWithData = compose(
-  graphql(gql(mutations.stagesUpdateOrder), {
+  graphql(mutations.dealStagesUpdateOrder, {
     name: 'stagesUpdateOrderMutation'
   }),
-  graphql(gql(mutations.stagesChange), {
+  graphql(mutations.dealStagesChange, {
     name: 'stagesChangeMutation'
   })
 )(PipelineContainer);
@@ -110,7 +109,7 @@ StagesWithPipeline.propTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.stages), {
+  graphql(queries.dealStages, {
     name: 'stagesQuery',
     options: ({ pipeline }) => ({
       variables: {

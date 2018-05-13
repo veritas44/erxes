@@ -1,28 +1,4 @@
-const commonVariables = `
-  $name: String!,
-  $stageId: String!,
-  $productsData: JSON,
-  $companyIds: [String],
-  $customerIds: [String],
-  $closeDate: Date,
-  $description: String,
-  $assignedUserIds: [String],
-  $order: Int,
-`;
-
-const commonParams = `
-  name: $name,
-  stageId: $stageId,
-  productsData: $productsData,
-  companyIds: $companyIds,
-  customerIds: $customerIds,
-  closeDate: $closeDate,
-  description: $description,
-  assignedUserIds: $assignedUserIds,
-  order: $order
-`;
-
-const commonReturn = `
+fragment DealForm on Deal {
   _id
   name
   stageId
@@ -47,17 +23,17 @@ const commonReturn = `
       avatar
     }
   }
-`;
+}
 
-mutation dealsAdd(${commonVariables}) {
-  dealsAdd(${commonParams}) {
-    ${commonReturn}
+mutation dealsAdd($name: String!, $stageId: String!, $productsData: JSON, $companyIds: [String], $customerIds: [String], $closeDate: Date, $description: String, $assignedUserIds: [String], $order: Int) {
+  dealsAdd(name: $name, stageId: $stageId, productsData: $productsData, companyIds: $companyIds, customerIds: $customerIds, closeDate: $closeDate, description: $description, assignedUserIds: $assignedUserIds, order: $order) {
+    ...DealForm
   }
 }
 
-mutation dealsEdit($_id: String!, ${commonVariables}) {
-  dealsEdit(_id: $_id, ${commonParams}) {
-    ${commonReturn}
+mutation dealsEdit($_id: String!, $name: String!, $stageId: String!, $productsData: JSON, $companyIds: [String], $customerIds: [String], $closeDate: Date, $description: String, $assignedUserIds: [String], $order: Int) {
+  dealsAdd(_id: $_id, name: $name, stageId: $stageId, productsData: $productsData, companyIds: $companyIds, customerIds: $customerIds, closeDate: $closeDate, description: $description, assignedUserIds: $assignedUserIds, order: $order) {
+    ...DealForm
   }
 }
 
@@ -81,7 +57,7 @@ mutation dealStagesUpdateOrder($orders: [OrderItem]) {
 
 mutation dealsChange($_id: String!, $stageId: String!) {
   dealsChange(_id: $_id, stageId: $stageId) {
-    ${commonReturn}
+    ...DealForm
   }
 }
 

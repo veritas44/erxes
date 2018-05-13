@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { DealSelect } from '../../components';
 import { queries } from '../../graphql';
 
@@ -80,16 +79,16 @@ DealSelectContainer.propTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.boards), {
+  graphql(queries.dealBoards, {
     name: 'boardsQuery'
   }),
-  graphql(gql(queries.pipelines), {
+  graphql(queries.dealPipelines, {
     name: 'pipelinesQuery',
     options: ({ boardId = '' }) => ({
       variables: { boardId }
     })
   }),
-  graphql(gql(queries.stages), {
+  graphql(queries.dealStages, {
     name: 'stagesQuery',
     options: ({ pipelineId = '' }) => ({
       variables: { pipelineId }

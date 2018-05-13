@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Alert } from 'modules/common/utils';
 import { Stage } from '../components';
 import { queries, mutations } from '../graphql';
@@ -154,16 +153,16 @@ StageContainer.contextTypes = {
 
 const StageContainerWithData = compose(
   // mutation
-  graphql(gql(mutations.dealsAdd), {
+  graphql(mutations.dealsAdd, {
     name: 'addMutation'
   }),
-  graphql(gql(mutations.dealsEdit), {
+  graphql(mutations.dealsEdit, {
     name: 'editMutation'
   }),
-  graphql(gql(mutations.dealsRemove), {
+  graphql(mutations.dealsRemove, {
     name: 'removeMutation'
   }),
-  graphql(gql(queries.stageDetail), {
+  graphql(queries.stageDetail, {
     name: 'stageDetailQuery',
     options: ({ stageId }) => ({
       variables: {
@@ -171,10 +170,10 @@ const StageContainerWithData = compose(
       }
     })
   }),
-  graphql(gql(mutations.dealsUpdateOrder), {
+  graphql(mutations.dealsUpdateOrder, {
     name: 'dealsUpdateOrderMutation'
   }),
-  graphql(gql(mutations.dealsChange), {
+  graphql(mutations.dealsChange, {
     name: 'dealsChangeMutation'
   })
 )(StageContainer);
@@ -203,7 +202,7 @@ StageWithDeals.propTypes = {
 };
 
 export default compose(
-  graphql(gql(queries.deals), {
+  graphql(queries.deals, {
     name: 'dealsQuery',
     options: ({ stageId }) => ({
       variables: {

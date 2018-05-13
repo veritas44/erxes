@@ -1,7 +1,11 @@
+fragment DealCommon on Deal {
+  _id
+  name
+}
+
 query dealBoards {
   dealBoards {
-    _id
-    name
+    ...DealCommon  
   }
 }
 

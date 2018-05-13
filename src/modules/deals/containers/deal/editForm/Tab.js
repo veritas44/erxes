@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Tab } from '../../../components/deal/editForm';
 import { queries } from '../../../graphql';
 
@@ -26,7 +25,7 @@ const propTypes = {
 TabContainer.propTypes = propTypes;
 
 export default compose(
-  graphql(gql(queries.activityLogsDeal), {
+  graphql(queries.activityLogsDeal, {
     name: 'dealActivityLogQuery',
     options: ({ deal }) => ({
       variables: {

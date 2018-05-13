@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Deal } from '../../components';
 import { queries } from '../../graphql';
 import { Spinner } from 'modules/common/components';
@@ -32,7 +31,7 @@ const propTypes = {
 DealContainer.propTypes = propTypes;
 
 export default compose(
-  graphql(gql(queries.dealDetail), {
+  graphql(queries.dealDetail, {
     name: 'dealDetailQuery',
     options: ({ dealId }) => ({
       variables: {
