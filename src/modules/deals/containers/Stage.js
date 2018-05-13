@@ -162,7 +162,7 @@ const StageContainerWithData = compose(
   graphql(mutations.dealsRemove, {
     name: 'removeMutation'
   }),
-  graphql(queries.stageDetail, {
+  graphql(queries.dealStageDetail, {
     name: 'stageDetailQuery',
     options: ({ stageId }) => ({
       variables: {
