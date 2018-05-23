@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Button, EmptyState } from 'modules/common/components';
+import { MarkdownWrapper } from 'modules/settings/styles';
+import { ModalFooter } from 'modules/common/styles/main';
 
 const propTypes = {
   integration: PropTypes.object.isRequired
@@ -60,27 +62,40 @@ class Manage extends Component {
 
   render() {
     return (
-      <div>
-        <ReactMarkdown source={this.state.code} />
-        {this.state.code ? (
-          <CopyToClipboard
-            text={this.state.code}
-            onCopy={() => this.setState({ copied: true })}
+      <Fragment>
+        <MarkdownWrapper>
+          <ReactMarkdown source={this.state.code} />
+          {this.state.code ? (
+            <CopyToClipboard
+              text={this.state.code}
+              onCopy={() => this.setState({ copied: true })}
+            >
+              <Button size="small" btnStyle="primary" icon="copy">
+                {this.state.copied ? 'Copied' : 'Copy to clipboard'}
+              </Button>
+            </CopyToClipboard>
+          ) : (
+            <EmptyState icon="copy" text="No copyable code" size="small" />
+          )}
+        </MarkdownWrapper>
+
+        <ModalFooter>
+          <Button
+            btnStyle="simple"
+            icon="cancel-1"
+            onClick={() => this.context.closeModal()}
           >
-            <Button size="small" btnStyle="primary" icon="ios-copy-outline">
-              {this.state.copied ? 'Copied' : 'Copy to clipboard'}
-            </Button>
-          </CopyToClipboard>
-        ) : (
-          <EmptyState icon="code" text="No copyable code" size="small" />
-        )}
-      </div>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Fragment>
     );
   }
 }
 
 Manage.propTypes = propTypes;
 Manage.contextTypes = {
+  closeModal: PropTypes.func.isRequired,
   __: PropTypes.func
 };
 

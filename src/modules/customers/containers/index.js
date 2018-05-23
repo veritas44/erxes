@@ -4,6 +4,9 @@ import EditInformation from './EditInformation';
 import CustomerAssociate from './CustomerAssociate';
 import CustomerChooser from './CustomerChooser';
 import CustomerForm from './CustomerForm';
+import BasicInfo from './detail/BasicInfo';
+import BrandFilter from './BrandFilter';
+import FormFilter from './FormFilter';
 
 export {
   CustomersList,
@@ -11,5 +14,8 @@ export {
   EditInformation,
   CustomerAssociate,
   CustomerChooser,
-  CustomerForm
+  CustomerForm,
+  BasicInfo,
+  BrandFilter,
+  FormFilter
 };
