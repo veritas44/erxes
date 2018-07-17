@@ -10,8 +10,8 @@ const uploadHandler = params => {
     afterRead
   } = params;
 
-  const { REACT_APP_API_URL } = process.env;
-  const url = `${REACT_APP_API_URL}/upload-file`;
+  const { REACT_API_URL } = process.env;
+  const url = `${REACT_API_URL}/upload-file`;
 
   // initiate upload file reader
   const uploadReader = new FileReader();

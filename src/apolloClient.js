@@ -6,11 +6,11 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { ApolloLink, split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 
-const { REACT_APP_API_URL, REACT_APP_API_SUBSCRIPTION_URL } = process.env;
+const { REACT_API_URL, REACT_API_SUBSCRIPTION_URL } = process.env;
 
 // Create an http link:
 const httpLink = createHttpLink({
-  uri: `${REACT_APP_API_URL}/graphql`
+  uri: `${REACT_API_URL}/graphql`
 });
 
 // Attach user credentials
@@ -50,7 +50,7 @@ const httpLinkWithMiddleware = afterwareLink.concat(
 
 // Subscription config
 const wsLink = new WebSocketLink({
-  uri: REACT_APP_API_SUBSCRIPTION_URL,
+  uri: REACT_API_SUBSCRIPTION_URL,
   options: {
     reconnect: true
   }
